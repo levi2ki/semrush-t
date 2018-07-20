@@ -49,6 +49,11 @@ function bracketsTest(expr) {
     const opener = found[i].token;
     const closer = found[found.length - 1 - i].token
 
+    // if closing bracket lead, will fail
+    if (opener.includes('__close')) {
+      return false;
+    }
+
     if(opener.replace(re, "$1__close") !== closer) {
       return false;
     }
@@ -61,8 +66,12 @@ const test1 = '({a})';
 const test2 = '[fatality({a})]';
 const test3 = '[{({a})]';
 const test4 = '[{({a}})]';
+const test5 = '}1}';
+const test6 = '}{';
 
 console.log(bracketsTest(test1));
 console.log(bracketsTest(test2));
 console.log(bracketsTest(test3));
 console.log(bracketsTest(test4));
+console.log(bracketsTest(test5));
+console.log(bracketsTest(test6));
