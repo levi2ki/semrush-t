@@ -1,3 +1,4 @@
+// token descriptions
 const tokens = {
   '{': 'curly__open',
   '}': 'curly__close',
@@ -6,27 +7,14 @@ const tokens = {
   '[': 'quart__open',
   ']': 'quart__close'
 };
+
+// token names to compare
 const tokenNames = Object.keys(tokens);
 
-
+// regexp replacer token names
 const re = /^(.*)__(.*)$/;
 
-const test1 = '({a})';
-const test2 = '[fatality({a})]';
-const test3 = '[{({a})]';
-const test4 = '[{({a}})]';
-
-// tail :: [t] -> t
-const tail = a => a.slice(-1).reduce(x => x);
-
-// head :: [h] -> h
-const head = a => a.slice(0, 1).reduce(x => x);
-/* token model
-    {
-      token: token,
-      position: index
-    }
-*/
+// construct token description
 const getToken = (token, idx) => ({token: tokens[token], position: idx});
 
 /**
@@ -67,6 +55,12 @@ function bracketsTest(expr) {
   }
   return true;
 }
+
+// dummy tests
+const test1 = '({a})';
+const test2 = '[fatality({a})]';
+const test3 = '[{({a})]';
+const test4 = '[{({a}})]';
 
 console.log(bracketsTest(test1));
 console.log(bracketsTest(test2));
